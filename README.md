@@ -7,3 +7,8 @@ Stack Utilizada
 Xamarin
 .Net Core
 Lite DB
+
+
+--TO DO
+Background
+Notification
