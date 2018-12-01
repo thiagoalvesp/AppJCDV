@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:AppJCDV"
+             Title="AppJCDV"
+             x:Class="AppJCDV.MainPage">
+    <TableView Intent="Form" VerticalOptions="CenterAndExpand" Margin="5,0,5,0">
+        <TableRoot>
+            <TableSection Title="Location">
+                <EntryCell Label="Latitude:" Text="{Binding Latitude}" IsEnabled="False"></EntryCell>
+                <EntryCell Label="Longitude:" Text="{Binding Longitude}" IsEnabled="False"></EntryCell>
+                <EntryCell Label="Altitude:" Text="{Binding Altitude}" IsEnabled="False"></EntryCell>
+                <ViewCell>
+                    <Button Text="{Binding BtnText}" Command="{Binding GetGeoLocationCommand}"></Button>
+                </ViewCell>
+            </TableSection>
+        </TableRoot>
+    </TableView>
+</ContentPage>
