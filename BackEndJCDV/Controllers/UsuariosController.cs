@@ -29,7 +29,28 @@ namespace BackEndJCDV.Controllers
             if (string.IsNullOrEmpty(DATABASE_PATH))
                 DATABASE_PATH = Directory.GetCurrentDirectory() + "\\Data\\Banco.db";
         }
-        
+
+        [HttpGet("{id}/Location")]
+        public IActionResult PatchLocation(Guid id)
+        {
+            try
+            {
+                using (var db = new LiteRepository(new LiteDatabase(DATABASE_PATH)))
+                {
+                    var usuario = db.SingleById<Usuario>(id, COLLECTION_USUARIOS_NAME);
+                    if (usuario == null)
+                        return NotFound();
+
+                    var location = usuario.Location;
+                    return Ok(location);
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
         [HttpPatch("{id}/Location")]
         public IActionResult PatchLocation(Guid id, [FromBody]Location location)
         {
@@ -91,6 +112,7 @@ namespace BackEndJCDV.Controllers
             }
         }
 
+        [AllowAnonymous]
         [HttpPost]
         public IActionResult Post([FromBody]Usuario usuario)
         {

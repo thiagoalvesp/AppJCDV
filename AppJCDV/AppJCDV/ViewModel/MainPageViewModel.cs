@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AppJCDV.Services;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,11 +19,11 @@ namespace AppJCDV.ViewModel
             get { return continueGetLocation; }
             set {
                 continueGetLocation = value;
-                BtnText = continueGetLocation ? "Stop Get Position!" : "Start Get Position!";
+                BtnText = continueGetLocation ? "Stop Send My Location!" : "Start Send My Location!";
             }
         }
 
-        private string btnText = "Start Get Position!";
+        private string btnText = "Start Send My Location!";
 
         public string BtnText
         {
@@ -97,6 +98,10 @@ namespace AppJCDV.ViewModel
                     Longitude = location.Longitude;
                     Altitude = location.Altitude;
                 }
+
+                await new UsuarioService().SendLocation(location);
+
+
             }
             catch (FeatureNotSupportedException fnsEx)
             {

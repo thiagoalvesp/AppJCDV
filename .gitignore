@@ -259,3 +259,4 @@ paket-files/
 # Python Tools for Visual Studio (PTVS)
 __pycache__/
 *.pyc
+/BackEndJCDV/Properties/PublishProfiles/BackEndJCDV20181201083159 - Web Deploy.pubxml
