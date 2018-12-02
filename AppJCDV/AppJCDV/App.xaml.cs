@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AppJCDV.View;
+using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -11,7 +12,7 @@ namespace AppJCDV
         {
             InitializeComponent();
 
-            MainPage = new MainPage();
+            MainPage = new TabbedPageNavigation();
         }
 
         protected override void OnStart()

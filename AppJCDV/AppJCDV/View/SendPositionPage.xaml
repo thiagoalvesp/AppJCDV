@@ -3,15 +3,15 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:AppJCDV"
              Title="AppJCDV"
-             x:Class="AppJCDV.MainPage">
+             x:Class="AppJCDV.SendPositionPage">
     <TableView Intent="Form" VerticalOptions="CenterAndExpand" Margin="5,0,5,0">
         <TableRoot>
-            <TableSection Title="Location">
+            <TableSection Title="My Location">
                 <EntryCell Label="Latitude:" Text="{Binding Latitude}" IsEnabled="False"></EntryCell>
                 <EntryCell Label="Longitude:" Text="{Binding Longitude}" IsEnabled="False"></EntryCell>
                 <EntryCell Label="Altitude:" Text="{Binding Altitude}" IsEnabled="False"></EntryCell>
                 <ViewCell>
-                    <Button Text="{Binding BtnText}" Command="{Binding GetGeoLocationCommand}"></Button>
+                    <Button Text="{Binding BtnText}" Command="{Binding SendGeoLocationCommand}"></Button>
                 </ViewCell>
             </TableSection>
         </TableRoot>

@@ -9,21 +9,21 @@ using Xamarin.Forms;
 
 namespace AppJCDV.ViewModel
 {
-    public class MainPageViewModel : BaseViewModel
+    public class SendPositionPageViewModel : BaseViewModel
     {
 
-        private bool continueGetLocation;
+        private bool continueSendLocation;
 
-        public bool ContinueGetLocation
+        public bool ContinueSendLocation
         {
-            get { return continueGetLocation; }
+            get { return continueSendLocation; }
             set {
-                continueGetLocation = value;
-                BtnText = continueGetLocation ? "Stop Send My Location!" : "Start Send My Location!";
+                continueSendLocation = value;
+                BtnText = continueSendLocation ? "Stop Send My Location" : "Start Send My Location";
             }
         }
 
-        private string btnText = "Start Send My Location!";
+        private string btnText = "Start Send My Location";
 
         public string BtnText
         {
@@ -67,20 +67,20 @@ namespace AppJCDV.ViewModel
             }
         }
 
-        public MainPageViewModel()
+        public SendPositionPageViewModel()
         {
-            GetGeoLocationCommand = new Command( async () =>
+            SendGeoLocationCommand = new Command( async () =>
             {
-                ContinueGetLocation = !ContinueGetLocation;
+                ContinueSendLocation = !ContinueSendLocation;
 
-                while (ContinueGetLocation)
+                while (ContinueSendLocation)
                 {
-                    await GetGeoLocation();
+                    await SendGeoLocation();
                 }
             });
         }
 
-        private async Task GetGeoLocation()
+        private async Task SendGeoLocation()
         {
             try
             {
@@ -105,25 +105,25 @@ namespace AppJCDV.ViewModel
             }
             catch (FeatureNotSupportedException fnsEx)
             {
-                ContinueGetLocation = false;
+                ContinueSendLocation = false;
                 MessagingCenter.Send<FeatureNotSupportedException>
                 (fnsEx, "FeatureNotSupported");
             }
             catch (PermissionException pEx)
             {
-                ContinueGetLocation = false;
+                ContinueSendLocation = false;
                 MessagingCenter.Send<PermissionException>
                     (pEx, "Permission");
             }
             catch (Exception ex)
             {
-                ContinueGetLocation = false;
+                ContinueSendLocation = false;
                 MessagingCenter.Send<Exception>
                  (ex, "Exception");
             }
         }
 
-        public ICommand GetGeoLocationCommand { get; set; }
+        public ICommand SendGeoLocationCommand { get; set; }
 
     }
 }

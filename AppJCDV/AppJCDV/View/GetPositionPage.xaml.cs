@@ -6,16 +6,18 @@ using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
 using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
 
-namespace AppJCDV
+namespace AppJCDV.View
 {
-    public partial class MainPage : ContentPage
-    {
-        public MainPage()
-        {
-            InitializeComponent();
-            this.BindingContext = new MainPageViewModel();
-        }
+	[XamlCompilation(XamlCompilationOptions.Compile)]
+	public partial class GetPositionPage : ContentPage
+	{
+		public GetPositionPage()
+		{
+            BindingContext = new GetPositionPageViewModel();
+			InitializeComponent ();
+		}
 
         protected override void OnAppearing()
         {
@@ -46,6 +48,5 @@ namespace AppJCDV
             MessagingCenter.Unsubscribe<PermissionException>(this, "Permission");
             MessagingCenter.Unsubscribe<Exception>(this, "Exception");
         }
-
     }
 }
