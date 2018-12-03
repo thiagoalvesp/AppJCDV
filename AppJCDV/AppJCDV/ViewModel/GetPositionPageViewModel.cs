@@ -11,6 +11,31 @@ namespace AppJCDV.ViewModel
 {
     public class GetPositionPageViewModel : BaseViewModel
     {
+        private bool btnMapsEnabled;
+
+        public bool BtnMapsEnabled
+        {
+            get { return btnMapsEnabled; }
+            set {
+                btnMapsEnabled = value;
+                OnPropertyChanged();
+            }
+        }
+
+
+        private Location location;
+  
+        public Location Location
+        {
+            get { return location; }
+            set {
+                location = value;
+                if (location != null)
+                    BtnMapsEnabled = true;
+                OnPropertyChanged();
+            }
+        }
+
         private bool continueGetLocation;
 
         public bool ContinueGetLocation
@@ -97,6 +122,12 @@ namespace AppJCDV.ViewModel
 
         public GetPositionPageViewModel()
         {
+            ShowOnMapsCommand = new Command(async () => {
+                if (Location != null)
+                    await Maps.OpenAsync(Location,
+                      new MapsLaunchOptions(){MapDirectionsMode = MapDirectionsMode.Driving,});
+            });
+
             GetGeoLocationCommand = new Command(async () =>
             {
                 ContinueGetLocation = !ContinueGetLocation;
@@ -131,6 +162,8 @@ namespace AppJCDV.ViewModel
                         .ToString($"F{2}");
                 }
 
+                Location = apiLocation;              
+            
             }
             catch (FeatureNotSupportedException fnsEx)
             {
@@ -153,6 +186,7 @@ namespace AppJCDV.ViewModel
         }
 
         public ICommand GetGeoLocationCommand { get; set; }
+        public ICommand ShowOnMapsCommand { get; set; }
 
     }
 }

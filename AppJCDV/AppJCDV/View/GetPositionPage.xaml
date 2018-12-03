@@ -13,6 +13,9 @@
                 <ViewCell>
                     <Button Text="Get Position" Command="{Binding GetGeoLocationCommand}"></Button>
                 </ViewCell>
+                <ViewCell>
+                    <Button Text="Show On Maps" Command="{Binding ShowOnMapsCommand}" IsEnabled="{Binding BtnMapsEnabled}"></Button>
+                </ViewCell>
             </TableSection>
         </TableRoot>
     </TableView>
